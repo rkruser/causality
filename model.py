@@ -22,7 +22,7 @@ class simModel:
 
 
 	def train(self, X, Z, Y):
-		print "Train"
+		#print "Train"
 		npatients = X.shape[0]
 		indTreated = np.reshape(Z==1,(npatients))
 		Xtreated = X[indTreated,:]
@@ -45,7 +45,7 @@ class simModel:
 
 		#print Z1Predict
 		#print Z0Predict
-		print "Gmm train"
+		#print "Gmm train"
 		individualOdds = (Z1Predict[:,1]/Z1Predict[:,0]) / (Z0Predict[:,1] / Z0Predict[:,0])
 		logOdds = np.log(individualOdds)
 		self.gmm = cl.getGmm(logOdds, numComponents=2**self.dataGen.nHeterogenous,BIC=self.bic)
@@ -58,7 +58,7 @@ class simModel:
 			return -1, -1, -1
 
 	def test(self, X, Z, Y):
-		print "Test"
+		#print "Test"
 		Z1Predict = self.treatedClassif.predict_proba(X)
 		Z0Predict = self.untreatedClassif.predict_proba(X)
 		individualOdds = (Z1Predict[:,1]/Z1Predict[:,0]) / (Z0Predict[:,1] / Z0Predict[:,0])
