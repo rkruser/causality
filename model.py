@@ -15,6 +15,11 @@ class simModel:
 	
 	def generate(self,nPatients):
 		return self.dataGen.generate(nPatients)
+	
+	def regenerate(self):
+		self.dataGen.regenerateParams()
+		self.dataGen.regenerateProbs()
+
 
 	def train(self, X, Z, Y):
 		print "Train"
@@ -66,14 +71,14 @@ class simModel:
 
 		return accuracy, np.histogram(logOdds,bins=50,density=True), np.histogram(individualOdds,bins=50,density=True)
 
-np.random.seed(19)
-
-genrate = dc.DataSim(nCovariates = 100, nHeterogenous=2, delta=np.array([[2],[4]]))
-thing = simModel(generator=genrate)
-Xtrain,Ztrain,Ytrain = thing.generate(30000)
-thing.train(Xtrain,Ztrain,Ytrain)
-Xtest, Ztest, Ytest = thing.generate(5000)
-accuracy, h1, h2 = thing.test(Xtest,Ztest,Ytest)
-print "accuracy: ", accuracy
-cl.visualize(thing.gmm, h1[0], h1[1])
+#np.random.seed(19)
+#
+#genrate = dc.DataSim(nCovariates = 100, nHeterogenous=2, delta=np.array([[2],[4]]))
+#thing = simModel(generator=genrate)
+#Xtrain,Ztrain,Ytrain = thing.generate(30000)
+#thing.train(Xtrain,Ztrain,Ytrain)
+#Xtest, Ztest, Ytest = thing.generate(5000)
+#accuracy, h1, h2 = thing.test(Xtest,Ztest,Ytest)
+#print "accuracy: ", accuracy
+#cl.visualize(thing.gmm, h1[0], h1[1])
 #cl.visualize(thing.gmm, h2[0], h2[1])
