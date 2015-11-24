@@ -9,7 +9,7 @@
 
 # Change the number of cores (ppn=1), amount of memory, and walltime:
 # use nodes=X:ppn=Y, where X*Y = numProcessors, or leave off nodes
-#PBS -l procs=8,mem=1000mb,walltime=12:00:00
+#PBS -l nodes=1:ppn=8,mem=1000mb,walltime=12:00:00
 #PBS -j oe
 #PBS -V
 
