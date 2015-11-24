@@ -82,7 +82,7 @@ def main():
 #	pickle.dump(out1,open("exp1result.pickle","wb"))
 #	out2 = experiment2()
 #	pickle.dump(out2,open("exp2result.pickle","wb"))
-	out3 = experiment3(numIter=3, low=100,high=100)
+	out3 = experiment3()
 	pickle.dump(out3,open(outdir+"exp3result.pickle","wb"))
 
 def testmain():

@@ -12,7 +12,7 @@
 #PBS -j oe
 #PBS -V
 
-# Change "example_flux" to the name of your Flux allocation:
+# "wiensj_flux" is the name of your Flux allocation:
 #PBS -A wiensj_flux
 #PBS -q flux
 #PBS -l qos=flux
