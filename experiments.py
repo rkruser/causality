@@ -80,7 +80,7 @@ def main():
 #	pickle.dump(out1,open("exp1result.pickle","wb"))
 #	out2 = experiment2()
 #	pickle.dump(out2,open("exp2result.pickle","wb"))
-	out3 = experiment3(low=100,high=500)
+	out3 = experiment3(low=100,high=300)
 	pickle.dump(out3,open("exp3result.pickle","wb"))
 
 def testmain():
@@ -88,4 +88,65 @@ def testmain():
 	out2 = experiment2(numIter=1, high=5000)
 	out3 = experiment3(numIter=1,high=100)
 
-main()
+def extractStats(e):
+	statsStruct = {}
+	for key, val in e.iteritems():
+		accuracyArr = np.zeros(len(val))
+		errorArr = np.zeros(len(val))
+		representative = None
+		for i in np.arange(0,len(val)):
+			if (i==0):
+				representative=(val[i][4],val[i][2],val[i][3])
+			accuracyArr[i]=val[i][0]
+			errorArr[i]=val[i][1]
+		avgAcc = np.average(accuracyArr)
+		avgErr = np.average(errorArr)
+		stdAcc = np.std(accuracyArr)
+		stdErr = np.std(errorArr)
+		histAcc = np.histogram(accuracyArr,bins=10)
+		histErr = np.histogram(errorArr,bins=10)
+		statsStruct[key]=(avgAcc, avgErr, stdAcc, stdErr, histAcc, histErr, representative)
+	return statsStruct
+
+def plotRepresentatives(statStruct, label, directory="./images/", extension=".jpg"):
+	plt.clf()
+	for key, val in statStruct.iteritems():
+		accHistLabel = label+'_'+str(key)+"_accuracy"
+		errHistLabel = label+'_'+str(key)+"_error"
+		repHistLabel = label+'_'+str(key)+"_representative"
+		cl.visualize(counts=val[4][0],bins=val[4][1],show=False,title=accHistLabel,xlabel="Accuracy",ylabel="Number of Trials")
+		#plt.show()
+		plt.savefig(directory+accHistLabel+extension)
+		plt.clf()
+		cl.visualize(counts=val[5][0],bins=val[5][1],show=False, title=errHistLabel,xlabel="(avg)Error",ylabel="Number of Trials")
+		plt.savefig(directory+errHistLabel+extension)
+		#plt.show()
+		plt.clf()
+		cl.visualize(gmm = val[6][0].gmm, counts=val[6][1][0],bins=val[6][1][1],show=False,title=repHistLabel)
+		plt.savefig(directory+repHistLabel+extension)
+		#plt.show()
+		plt.clf()
+
+def printStatistics(statStruct, label, directory="./images/", extension=".csv"):
+	filename=directory+label+extension
+	fileObj = open(filename,"wb")
+	fileObj.write("Parameter, Average Accuracy, Accuracy STD, Average Error, Error STD\n")
+	for key, val in statStruct.iteritems():
+		fileObj.write(str(key)+','+str(val[0])+','+str(val[2])+','+str(val[1])+','+str(val[3])+'\n')
+
+
+def loadVisualize():
+	exp1 = pickle.load(open("exp1result.pickle"))
+	exp2 = pickle.load(open("exp2result.pickle"))
+	exp3 = pickle.load(open("exp3result.pickle"))
+	exp1struct = extractStats(exp1)
+	exp2struct = extractStats(exp2)
+	exp3struct = extractStats(exp3)
+	plotRepresentatives(exp1struct, "exp1_n=10000")
+	plotRepresentatives(exp2struct, "exp2_delt=0.75")
+	plotRepresentatives(exp3struct, "exp3_delt=0.75_n=50000")
+	printStatistics(exp1struct, "exp1_n=10000")
+	printStatistics(exp2struct, "exp2_delt=0.75")
+	printStatistics(exp3struct, "exp3_delt=0.75_n=50000")
+
+loadVisualize()

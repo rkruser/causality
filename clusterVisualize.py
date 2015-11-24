@@ -56,22 +56,27 @@ def visualizeGmm(gmm, logOdds):
 		plt.plot(x_plot, rv.pdf(x_plot))
 	plt.show()
 
-def visualize(gmm, counts, bins):
+def visualize(gmm=None, counts=None, bins=None, show=True,
+ title="Log Odds Ratio Histogram",
+ xlabel="Log Odds Ratio",
+ ylabel="Frequency"):
 	#plt.hist(counts,bins=bins, normed=True)
 	width = bins[1]-bins[0]
 	plt.bar(bins[:bins.size-1], counts, width=width) #How do I plot a pre-made histogram?
-	plt.title("Log Odds Ratio Histogram")
-	plt.xlabel("Log Odds Ratio")
-	plt.ylabel("Frequency")
-	means = gmm.means_
-	variances = gmm.covars_
-	x_plot = np.linspace(min(bins),max(bins),200)
-	for m in np.arange(0,means.size):
-		mu = means[m,0]
-		sigma = variances[m,0]**0.5
-		rv = stats.norm(mu,sigma)
-		plt.plot(x_plot, rv.pdf(x_plot))
-	plt.show()
+	plt.title(title)
+	plt.xlabel(xlabel)
+	plt.ylabel(ylabel)
+	if (gmm is not None):
+		means = gmm.means_
+		variances = gmm.covars_
+		x_plot = np.linspace(min(bins),max(bins),200)
+		for m in np.arange(0,means.size):
+			mu = means[m,0]
+			sigma = variances[m,0]**0.5
+			rv = stats.norm(mu,sigma)
+			plt.plot(x_plot, rv.pdf(x_plot))
+	if (show):
+		plt.show()
 
 def getError(unsorted_Means, sorted_True_Means):
 	means = unsorted_Means.reshape(unsorted_Means.size)
