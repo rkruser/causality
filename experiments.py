@@ -12,7 +12,7 @@ np.random.seed(1)
 # One heterogenous variable
 # Iterate over deltas
 # Regenerate model parameters
-def experiment1(numIter=30, numTrain=10000, numTest=10000):
+def experiment1(numIter=30, numTrain=30000, numTest=10000):
 	print "experiment 1"
 	deltaDict = {}
 	for delt in np.arange(-3.0,3.5,0.5):
@@ -56,7 +56,7 @@ def experiment2(delt=0.75, numIter=30, low=5000, high = 100000, step=5000, numTe
 
 # number of covariates
 # Note: 600 is highest this will go, for 50000 users
-def experiment3(delt=0.75, numIter=30, low=100, high=600, step=100, numTrain=30000, numTest=10000):
+def experiment3(delt=1.5, numIter=30, low=100, high=600, step=100, numTrain=30000, numTest=10000):
 	print "experiment 3"
 	dimDict = {}
 	for numCovs in np.arange(low,high+step,step):
@@ -78,12 +78,12 @@ def experiment3(delt=0.75, numIter=30, low=100, high=600, step=100, numTrain=300
 
 def main():
 	outdir = "output/"
-#	out1 = experiment1()
-#	pickle.dump(out1,open("exp1result.pickle","wb"))
+	out1 = experiment1()
+	pickle.dump(out1,open("exp1result.pickle","wb"))
 #	out2 = experiment2()
 #	pickle.dump(out2,open("exp2result.pickle","wb"))
-	out3 = experiment3()
-	pickle.dump(out3,open(outdir+"exp3result.pickle","wb"))
+#	out3 = experiment3()
+#	pickle.dump(out3,open(outdir+"exp3result.pickle","wb"))
 
 def testmain():
 	out1 = experiment1(numIter=1)
@@ -146,9 +146,9 @@ def loadVisualize():
 	exp3struct = extractStats(exp3)
 	plotRepresentatives(exp1struct, "exp1_n=10000")
 	plotRepresentatives(exp2struct, "exp2_delt=0.75")
-	plotRepresentatives(exp3struct, "exp3_delt=0.75_n=50000")
+	plotRepresentatives(exp3struct, "exp3_delt=1.5_n=50000")
 	printStatistics(exp1struct, "exp1_n=10000")
 	printStatistics(exp2struct, "exp2_delt=0.75")
-	printStatistics(exp3struct, "exp3_delt=0.75_n=50000")
+	printStatistics(exp3struct, "exp3_delt=1.5_n=50000")
 
 main()
