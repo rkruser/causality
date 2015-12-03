@@ -138,9 +138,9 @@ def printStatistics(statStruct, label, directory="./images/", extension=".csv"):
 
 
 def loadVisualize():
-	exp1 = pickle.load(open("exp1result.pickle"))
-	exp2 = pickle.load(open("exp2result.pickle"))
-	exp3 = pickle.load(open("exp3result.pickle"))
+	exp1 = pickle.load(open("output/exp1RerunResult.pickle"))
+#	exp2 = pickle.load(open("output/exp2result.pickle"))
+#	exp3 = pickle.load(open("output/exp3delt1.5result.pickle"))
 	exp1struct = extractStats(exp1)
 	exp2struct = extractStats(exp2)
 	exp3struct = extractStats(exp3)
@@ -151,4 +151,4 @@ def loadVisualize():
 	printStatistics(exp2struct, "exp2_delt=0.75")
 	printStatistics(exp3struct, "exp3_delt=1.5_n=50000")
 
-main()
+loadVisualize()
