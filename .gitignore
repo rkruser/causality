@@ -9,3 +9,4 @@
 *.jpg
 *.csv
 *.o*
+results/*
