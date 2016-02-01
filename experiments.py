@@ -12,12 +12,16 @@ np.random.seed(1)
 # One heterogenous variable
 # Iterate over deltas
 # Regenerate model parameters
-def experiment1(numIter=30, numTrain=30000, numTest=10000):
+def experiment1(numIter=30, 
+                numTrain=30000, 
+                numTest=10000):
 	print "experiment 1"
 	deltaDict = {}
 	for delt in np.arange(-3.0,3.5,0.5):
 		print "  delta=",delt
-		datgen = dc.DataSim(nCovariates=100,nHeterogenous=1,delta=np.array([[delt]]))
+		datgen = dc.DataSim(nCovariates=100,
+                nHeterogenous=1,
+                delta=np.array([[delt]]))
 		datmodel = mdl.simModel(generator = datgen)
 		data = []
 		for i in np.arange(0,numIter):
@@ -34,9 +38,16 @@ def experiment1(numIter=30, numTrain=30000, numTest=10000):
 	return deltaDict
 
 # Sample size
-def experiment2(delt=0.75, numIter=30, low=5000, high = 100000, step=5000, numTest=10000):
+def experiment2(delt=0.75, 
+        numIter=30, 
+        low=5000, 
+        high = 100000, 
+        step=5000, 
+        numTest=10000):
 	print "experiment 2"
-	datgen = dc.DataSim(nCovariates=100,nHeterogenous=1,delta=np.array([[delt]]))
+	datgen = dc.DataSim(nCovariates=100,
+            nHeterogenous=1,
+            delta=np.array([[delt]]))
 	datmodel=mdl.simModel(generator=datgen)
 	trainDict = {}
 	for numTrain in np.arange(low,high+step,step):
@@ -56,12 +67,20 @@ def experiment2(delt=0.75, numIter=30, low=5000, high = 100000, step=5000, numTe
 
 # number of covariates
 # Note: 600 is highest this will go, for 50000 users
-def experiment3(delt=1.5, numIter=30, low=100, high=600, step=100, numTrain=30000, numTest=10000):
+def experiment3(delt=1.5, 
+        numIter=30, 
+        low=100, 
+        high=600, 
+        step=100, 
+        numTrain=30000, 
+        numTest=10000):
 	print "experiment 3"
 	dimDict = {}
 	for numCovs in np.arange(low,high+step,step):
 		print "  numCovs=", numCovs
-		datgen = dc.DataSim(nCovariates=numCovs,nHeterogenous=1,delta=np.array([[delt]]))
+		datgen = dc.DataSim(nCovariates=numCovs,
+                nHeterogenous=1,
+                delta=np.array([[delt]]))
 		datmodel=mdl.simModel(generator=datgen)
 		data=[]
 		for i in np.arange(0,numIter):
@@ -107,24 +126,45 @@ def extractStats(e):
 		stdErr = np.std(errorArr)
 		histAcc = np.histogram(accuracyArr,bins=10)
 		histErr = np.histogram(errorArr,bins=10)
-		statsStruct[key]=(avgAcc, avgErr, stdAcc, stdErr, histAcc, histErr, representative)
+		statsStruct[key]=(avgAcc, 
+                avgErr, 
+                stdAcc, 
+                stdErr, 
+                histAcc, 
+                histErr, 
+                representative)
 	return statsStruct
 
-def plotRepresentatives(statStruct, label, directory="./images/", extension=".jpg"):
+def plotRepresentatives(statStruct, 
+        label, 
+        directory="./images/", 
+        extension=".jpg"):
 	plt.clf()
 	for key, val in statStruct.iteritems():
 		accHistLabel = label+'_'+str(key)+"_accuracy"
 		errHistLabel = label+'_'+str(key)+"_error"
 		repHistLabel = label+'_'+str(key)+"_representative"
-		cl.visualize(counts=val[4][0],bins=val[4][1],show=False,title=accHistLabel,xlabel="Accuracy",ylabel="Number of Trials")
+		cl.visualize(counts=val[4][0],
+                bins=val[4][1],
+                show=False,
+                title=accHistLabel,
+                xlabel="Accuracy",
+                ylabel="Number of Trials")
 		#plt.show()
 		plt.savefig(directory+accHistLabel+extension)
 		plt.clf()
-		cl.visualize(counts=val[5][0],bins=val[5][1],show=False, title=errHistLabel,xlabel="(avg)Error",ylabel="Number of Trials")
+		cl.visualize(counts=val[5][0],
+                bins=val[5][1],show=False, 
+                title=errHistLabel,xlabel="(avg)Error",
+                ylabel="Number of Trials")
 		plt.savefig(directory+errHistLabel+extension)
 		#plt.show()
 		plt.clf()
-		cl.visualize(gmm = val[6][0].gmm, counts=val[6][1][0],bins=val[6][1][1],show=False,title=repHistLabel)
+		cl.visualize(gmm = val[6][0].gmm, 
+                counts=val[6][1][0],
+                bins=val[6][1][1],
+                show=False,
+                title=repHistLabel)
 		plt.savefig(directory+repHistLabel+extension)
 		#plt.show()
 		plt.clf()

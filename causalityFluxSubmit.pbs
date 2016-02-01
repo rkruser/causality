@@ -33,3 +33,4 @@ fi
 
 #  Put your job commands here:
 python experiments.py
+# mpiexec -n 12 python doExperiments.py
