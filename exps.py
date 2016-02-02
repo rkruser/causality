@@ -8,15 +8,80 @@ from sklearn import mixture
 import pickle
 
 EXP_1 = 1 # Number of patients vs dimension
+EXP_1_MAX_PATIENTS = 50000
+EXP_1_PATIENT_STEP = 5000
+EXP_1_MAX_DIMENSION = 2000
+EXP_1_DIM_STEP = 100
+EXP_1_NSPARSE = 0
+EXP_1_NHETER = 1
+EXP_1_HETERMEANS = np.array([[1.5]]) #umm, maybe?
+EXP_1_NITERS = 30
+EXP_1_NTEST = 2000 #?
+EXP_1_BIC = False
+
+
 EXP_2 = 2 # Number of patients vs Sparsity
+EXP_2_MAX_PATIENTS = 50000
+EXP_2_PATIENT_STEP = 5000
+EXP_2_MAX_SPARSITY = 90
+EXP_2_SPARSE_STEP = 10
+EXP_2_NDIMS = 500
+EXP_2_NHETER = 1
+EXP_2_HETERMEANS = np.array([[1.5]]) #umm, maybe?
+EXP_2_NITERS = 30
+EXP_2_NTEST = 2000 #?
+EXP_2_BIC = False
+
 EXP_3 = 3 # Sparsity vs dimension
+EXP_3_MAX_DIMENSION = 2000
+EXP_3_DIM_STEP = 200
+EXP_3_MAX_SPARSITY = 90
+EXP_3_SPARSE_STEP = 10
+EXP_3_NPATIENTS = 30000
+EXP_3_NHETER = 1
+EXP_3_HETERMEANS = np.array([[1.5]]) #umm, maybe?
+EXP_3_NITERS = 30
+EXP_3_NTEST = 2000 #?
+EXP_3_BIC = False
+
 EXP_4 = 4 # Number of subgroups vs dimension
+EXP_4_MAX_DIMENSION = 2000
+EXP_4_DIM_STEP = 200
+EXP_4_MAX_HETER = 4
+EXP_4_HETER_STEP = 1
+EXP_4_NPATIENTS = 30000
+EXP_4_NSPARSE = 0
+EXP_4_HETERMEANS = np.array([[1.5],[2],[3],[4]]) #should be all means, here
+EXP_4_NITERS = 30
+EXP_4_NTEST = 2000 #?
+EXP_4_BIC = True #?
+
 EXP_5 = 5 # Number of means vs separation of means
+EXP_5_MAX_MEAN = 3
+EXP_5_MEAN_STEP = 1 #?
+EXP_5_MAX_HETER = 4
+EXP_5_HETER_STEP = 1
+EXP_5_NSPARSE = 0
+EXP_5_NDIMS = 500
+EXP_5_NPATIENTS = 30000
+EXP_5_NHETER = 1
+EXP_5_HETERMEANS = np.array([[1.5]]) #umm, maybe?
+EXP_5_NITERS = 30
+EXP_5_NTEST = 2000 #?
+EXP_5_BIC = True #?
 
 
 
 def generateExperiments():
+    # Experiment 1
     expList = []
+    for i in np.arange(0,EXP_1_MAX_PATIENTS,EXP_1_PATIENT_STEP):
+
+
+
+
+
+    return expList
     
 
 # Also need a function to generate queries
