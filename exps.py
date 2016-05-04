@@ -73,9 +73,87 @@ EXP_5_BIC = True #?
 
 
 def generateExperiments():
-    # Experiment 1
+    # Experiment 1 ********************************
     expList = []
-    for i in np.arange(0,EXP_1_MAX_PATIENTS,EXP_1_PATIENT_STEP):
+    for i in np.arange(EXP_1_PATIENT_STEP,
+        EXP_1_MAX_PATIENTS+EXP_1_PATIENT_STEP,
+        EXP_1_PATIENT_STEP):
+        for j in np.arange(EXP_1_DIM_STEP, 
+            EXP_1_MAX_DIMENSION+EXP_1_DIM_STEP,
+            EXP_1_DIM_STEP):
+            expList.append([i, 
+                j, 
+                EXP_1_NSPARSE, 
+                EXP_1_NHETER, 
+                EXP_1_HETERMEANS, 
+                EXP_1_NITERS, 
+                EXP_1_NTEST, 
+                EXP_1_BIC])
+
+    # Experiment 2 ********************************
+    for i in np.arange(EXP_2_PATIENT_STEP,
+        EXP_2_MAX_PATIENTS+EXP_2_PATIENT_STEP,
+        EXP_2_PATIENT_STEP):
+        for j in np.arange(0, 
+            EXP_2_MAX_SPARSITY+EXP_2_SPARSE_STEP,
+            EXP_2_SPARSE_STEP):
+            expList.append([i, 
+                j, 
+                EXP_1_NSPARSE, 
+                EXP_1_NHETER, 
+                EXP_1_HETERMEANS, 
+                EXP_1_NITERS, 
+                EXP_1_NTEST, 
+                EXP_1_BIC])
+
+    # Experiment 3 ********************************
+    # ******** Left off here **********************
+    for i in np.arange(EXP_1_PATIENT_STEP,
+        EXP_1_MAX_PATIENTS+EXP_1_PATIENT_STEP,
+        EXP_1_PATIENT_STEP):
+        for j in np.arange(EXP_1_DIM_STEP, 
+            EXP_1_MAX_DIMENSION,
+            EXP_1_DIM_STEP):
+            expList.append([i, 
+                j, 
+                EXP_1_NSPARSE, 
+                EXP_1_NHETER, 
+                EXP_1_HETERMEANS, 
+                EXP_1_NITERS, 
+                EXP_1_NTEST, 
+                EXP_1_BIC])
+
+     # Experiment 4 ********************************
+    for i in np.arange(EXP_1_PATIENT_STEP,
+        EXP_1_MAX_PATIENTS+EXP_1_PATIENT_STEP,
+        EXP_1_PATIENT_STEP):
+        for j in np.arange(EXP_1_DIM_STEP, 
+            EXP_1_MAX_DIMENSION,
+            EXP_1_DIM_STEP):
+            expList.append([i, 
+                j, 
+                EXP_1_NSPARSE, 
+                EXP_1_NHETER, 
+                EXP_1_HETERMEANS, 
+                EXP_1_NITERS, 
+                EXP_1_NTEST, 
+                EXP_1_BIC])           
+
+    # Experiment 5 ********************************
+    for i in np.arange(EXP_1_PATIENT_STEP,
+        EXP_1_MAX_PATIENTS+EXP_1_PATIENT_STEP,
+        EXP_1_PATIENT_STEP):
+        for j in np.arange(EXP_1_DIM_STEP, 
+            EXP_1_MAX_DIMENSION,
+            EXP_1_DIM_STEP):
+            expList.append([i, 
+                j, 
+                EXP_1_NSPARSE, 
+                EXP_1_NHETER, 
+                EXP_1_HETERMEANS, 
+                EXP_1_NITERS, 
+                EXP_1_NTEST, 
+                EXP_1_BIC])
 
 
 
